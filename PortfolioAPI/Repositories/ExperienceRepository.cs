@@ -2,9 +2,10 @@ using PortfolioAPI.Entities;
 
 namespace PortfolioAPI.Repositories;
 
-public static class ExperienceRepository
+public class ExperienceRepository
 {
-    public static List<Experience> Experiences { get; set; } = new List<Experience>{
+    public ExperienceRepository(){ }
+    public List<Experience> Experiences { get; set; } = new List<Experience>{
             new Experience()
             {
                 Id = 1,
@@ -30,7 +31,7 @@ public static class ExperienceRepository
                 Sumary = "hdsofhasldf"
             }
         };
-    public static void AddExperience(Experience experience)
+    public void AddExperience(Experience experience)
     {
         Experiences.Add(experience);
     }

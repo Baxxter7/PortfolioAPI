@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using PortfolioAPI.Data.Repositories;
 using PortfolioAPI.Entities;
 using PortfolioAPI.Models;
-using PortfolioAPI.Repositories;
 
 namespace PortfolioAPI.Controllers
 {
@@ -11,20 +11,23 @@ namespace PortfolioAPI.Controllers
     [ApiController]
     public class ExperienceController : ControllerBase
     {
+        
         private readonly ExperienceRepository _repository;
         public ExperienceController(ExperienceRepository repository)
         {
             _repository = repository;
         }
 
+
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Experience>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Get()
         {
-            return Ok(_repository.Experiences.Where(e => e.State == "Active"));
+            return Ok(_repository.GetAll().Where(e => e.State == "Active"));
         }
-
+        
+        /*
         [HttpGet("{titleForSearch}")]
         [ProducesResponseType(typeof(IEnumerable<Experience>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -32,6 +35,7 @@ namespace PortfolioAPI.Controllers
         {
             return Ok(_repository.Experiences.Where(e => e.Title.Contains(titleForSearch)  && e.State == "Active"));
         }
+        */
 
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -45,11 +49,12 @@ namespace PortfolioAPI.Controllers
                 ImagePath = experienceDto.ImagePath,
                 Sumary = "En proceso"
             };
-            
+
            _repository.AddExperience(entity);
-            return Ok("Registro guardado exitosamente");
+           return Ok("Registro guardado exitosamente");
         }
 
+        /*
         [HttpPut("{idExperience}")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -69,7 +74,7 @@ namespace PortfolioAPI.Controllers
                 ImagePath = requestDto.ImagePath,
                 Sumary = _repository.Experiences[entityId].Sumary
             };
-            
+
             _repository.Experiences[entityId]  = newExperience;
             return Ok("Registro editado exitosamente");
         }
@@ -84,7 +89,7 @@ namespace PortfolioAPI.Controllers
             {
                 return BadRequest("Experiencia no encontrada");
             }
-            
+
             Experience deletedExperience = new Experience()
             {
                 Id = idExperience,
@@ -94,9 +99,10 @@ namespace PortfolioAPI.Controllers
                 Sumary = _repository.Experiences[entityId].Sumary,
                 State = "Deleted"
             };
-                
+
             _repository.Experiences[entityId]  = deletedExperience;
             return Ok("Registro eliminado exitosamente");
         }
+    */
     }
 }

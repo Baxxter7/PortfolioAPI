@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using PortfolioAPI.Entities;
+using PortfolioAPI.Data.Entities;
 
 namespace PortfolioAPI.Data;
 

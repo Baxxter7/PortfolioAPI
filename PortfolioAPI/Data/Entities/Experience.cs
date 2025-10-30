@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PortfolioAPI.Entities;
+namespace PortfolioAPI.Data.Entities;
 
 public class Experience
 {

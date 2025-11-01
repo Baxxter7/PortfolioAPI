@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
     );
 
 builder.Services.AddScoped<ExperienceRepository>();
+builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
 

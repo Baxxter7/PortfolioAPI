@@ -1,5 +1,4 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioAPI.Data.Entities;
 using PortfolioAPI.Data.Repositories;
@@ -20,11 +19,12 @@ namespace PortfolioAPI.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<Experience>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Get()
         {
-            return Ok(_repository.GetAll().Where(e => e.State == "Active"));
+            return Ok(_repository.GetAll());
         }
         
 

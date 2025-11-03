@@ -11,7 +11,7 @@ public class ExperienceRepository
     {
         _context = context;
     }
-    public List<Experience> GetAll() => _context.Experiences.ToList();
+    public List<Experience> GetAll() => _context.Experiences.Where(e => e.State == "Active").ToList();
     public List<Experience> GetByTitle(string title) => _context.Experiences.Where(e => e.Title.Contains(title)  && e.State == "Active").ToList() ;
     
     public int AddExperience(Experience experience)
